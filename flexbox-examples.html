@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практические примеры CSS Flexbox</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        h2 {
+            margin: 25px 0 15px;
+            color: #3498db;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            margin: 20px 0 10px;
+            color: #2980b9;
+        }
+
+        .example-container {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .code-block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .example-demo {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        /* Пример 1: Навигационное меню */
+        .nav-menu {
+            display: flex;
+            list-style-type: none;
+            background-color: #3498db;
+            border-radius: 5px;
+        }
+
+        .nav-menu li {
+            padding: 15px 20px;
+        }
+
+        .nav-menu li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-menu-space-between {
+            justify-content: space-between;
+        }
+
+        .nav-menu-center {
+            justify-content: center;
+        }
+
+        .nav-menu-flex-end {
+            justify-content: flex-end;
+        }
+
+        /* Пример 2: Карточки */
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            flex: 1 0 250px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            border-top: 4px solid #3498db;
+        }
+
+        /* Пример 3: Центрирование */
+        .centering-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+        }
+
+        .centered-item {
+            padding: 20px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+        }
+
+        /* Пример 4: Макет страницы */
+        .page-layout {
+            display: flex;
+            flex-direction: column;
+            min-height: 400px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .header, .footer {
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            flex: 0 0 150px;
+            background-color: #ecf0f1;
+            padding: 15px;
+        }
+
+        .content {
+            flex: 1;
+            padding: 15px;
+            background-color: white;
+        }
+
+        /* Пример 5: Адаптивная сетка */
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .grid-item {
+            flex: 1 0 calc(25% - 15px);
+            height: 100px;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        /* Пример 6: Выравнивание форм */
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .form-label {
+            flex: 0 0 150px;
+            font-weight: bold;
+        }
+
+        .form-control {
+            flex: 1 0 200px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        /* Пример 7: Порядок элементов */
+        .order-container {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .order-item {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background-color: #3498db;
+            color: white;
+            margin: 0 5px;
+            border-radius: 5px;
+        }
+
+        .order-1 { order: 1; }
+        .order-2 { order: 2; }
+        .order-3 { order: 3; }
+        .order-4 { order: 4; }
+
+        /* Пример 8: Медиа-объект */
+        .media-object {
+            display: flex;
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .media-image {
+            flex: 0 0 100px;
+            height: 100px;
+            background-color: #3498db;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+
+        .media-body {
+            flex: 1;
+        }
+
+        /* Адаптивность для примеров */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                flex: 0 0 auto;
+            }
+
+            .grid-item {
+                flex: 1 0 calc(50% - 15px);
+            }
+
+            .order-container {
+                flex-direction: column;
+            }
+
+            .order-item {
+                margin: 5px 0;
+            }
+
+            .media-object {
+                flex-direction: column;
+            }
+
+            .media-image {
+                flex: 0 0 auto;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Практические примеры CSS Flexbox</h1>
+
+        <div class="example-container">
+            <h2>Пример 1: Навигационное меню</h2>
+            
+            <h3>1.1 Меню с равномерным распределением (space-between)</h3>
+            <div class="code-block">
+                .nav-menu {<br>
+                &nbsp;&nbsp;display: flex;<br>
+                &nbsp;&nbsp;justify-content: space-between;<br>
+                }
+            </div>
+            <div class="example-demo">
+                <ul class="nav-menu nav-menu-space-between">
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Услуги</a></li>
+                    <li><a href="#">Блог</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+            </div>
+
+            <h3>1.2 Меню по центру</h3>
+            <div class="code-block">
+                .nav-menu {<br>
+                &nbsp;&nbsp;display: flex;<br>
+                &nbsp;&nbsp;justify-content: center;<br>
+                }
+            </div>
+            <div class="example-demo">
+                <ul class="nav-menu nav-menu-center">
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Услуги</a></li>
+                    <li><a href="#">Блог</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+            </div>
+
+            <h3>1.3 Меню справа</h3>
+            <div class="code-block">
+                .nav-menu {<br>
+                &nbsp;&nbsp;display: flex;<br>
+                &nbsp;&nbsp;justify-content: flex-end;<br>
+                }
+            </div>
+            <div class="example-demo">
+                <ul class="nav-menu nav-menu-flex-end">
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Услуги</a></li>
+                    <li><a href="#">Блог</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="example-container">
+            <h2>Пример 2: Карточки с равной высотой</h2>
+            <div class="code-block">
+                .cards-container {<br>
+                &nbsp;&nbsp;display: flex;<br>
+                &nbsp;&nbsp;flex-wrap: wrap;<br>
+                &nbsp;&nbsp;gap: 20px;<br>
+                }<br><br>
+                .card {<br>
+                &nbsp;&nbsp;flex: 1 0 250px;<br>
+                }
+            </div>
+            <div class="example-demo">
+                <div class="cards-container">
+                    <div class="card">
+                        <h3>Карточка 1</h3>
+                        <p>Содержимое карточки. Flexbox автоматически делает все карточки одинаковой высоты.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Карточка 2</h3>
+                        <p>Карточка с большим содержимым. Обратите внимание, что все карточки растягиваются до высоты самой высокой карточки.</p>
+                        <p>Дополнительный текст для увеличения высоты.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Карточка 3</h3>
+                        <p>Еще одна карточка в нашем наборе.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-container">
+            <h2>Пример 3: Центрирование элемента</h2>
+            <div class="code-block">
+                .centering-container {<br>
+                &nbsp;&nbsp;display: flex;<br>
+                &nbsp;&nbsp;justify-content: center;<br>
+                &nbsp;&nbsp;align-items: center;<br>
+                &nbsp;&nbsp;height: 200px;<br>
+                }
+            </div>
+            <div class="example-demo">
+                <div class="centering-container">
+                    <div class="centered-item">Центрированный элемент</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-container">
+            <h2>Пример 4: Макет страницы (Holy Grail Layout)</h2>
+            <div class="code-block">
+                .page-layout {<br>
+                &nbsp;&nbsp;display: flex;<br>
+                &nbsp;&nbsp;flex-direction: column;<br>
+                }<br><br>
+                .main-content {<br>
+                &nbsp;&nbsp;display: flex;<br>
+                &nbsp;&nbsp;flex: 1;<br>
+                }<br><br>
+                .sidebar {<br>
+                &nbsp;&nbsp;flex: 0 0 150px;<br>
+                }<br><br>
+                .content {<br>
+                &nbsp;&nbsp;flex: 1;<br>
+                }
+            </div>
+            <div class="example-demo">
+                <div class="page-layout">
+                    <header class="header">Шапка сайта</header>
+                    <div class="main-content">
+                        <aside class="sidebar">Боковая панель</aside>
+                        <main class="content">
+                            <h3>Основной контент</h3>
+                            <p>Это основная часть страницы. В мобильной версии боковая панель перемещается над основным контентом.</p>
+                        </main>
+                    </div>
+                    <footer class="footer">Подвал сайта</footer>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-container">
+            <h2>Пример 5: Адаптивная сетка</h2>
+            <div class="code-block">
+                .grid {<br>
+                &nbsp;&nbsp;display: flex;<br>
+                &nbsp;&nbsp;flex-wrap: wrap;<br>
+                &nbsp;&nbsp;gap: 15px;<br>
+                }<br><br>
+                .grid-item {<br>
+                &nbsp;&nbsp;flex: 1 0 calc(25% - 15px);<br>
+                }<br><br>
+                @media (max-width: 768px) {<br>
+                &nbsp;&nbsp;.grid-item {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;flex: 1 0 calc(50% - 15px);<br>
+                &nbsp;&nbsp;}<br>
+                }
+            </div>
+            <div class="example-demo">
+                <div class="grid">
+                    <div class="grid-item">Элемент 1</div>
+                    <div class="grid-item">Элемент 2</div>
+                    
